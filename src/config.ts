@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Dialect, Sequelize } from 'sequelize';
 
 const dbName = process.env.DB_NAME as string;

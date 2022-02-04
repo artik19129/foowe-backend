@@ -6,9 +6,12 @@ import IndexRoutes from './routes/index.routes';
 import AuthRoutes from './routes/auth.routes';
 
 import { NextFunction } from 'express/ts4.0';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export class App {
     app: Application;
+
 
     constructor(
         private port?: number | string,
@@ -32,6 +35,21 @@ export class App {
     private settings() {
         this.app.set('port', this.port || process.env.PORT || 3000);
     }
+
+    // private isDev() {
+    //     fs.readdir(path.join(__dirname, 'models'), (err, files) => {
+    //         if (err)
+    //             console.log(err);
+    //         else {
+    //             files.forEach((file) => {
+    //                 const model1 = sequelize['import'](path.join(__dirname, file));
+    //                 const model = fs.readFileSync(path.join(__dirname, 'models', file), {encoding:'utf8', flag:'r'});
+    //                 //@ts-ignore
+    //                 model.sync();
+    //             })
+    //         }
+    //     })
+    // }
 
     private middlewares() {
         this.app.use(morgan('dev'));

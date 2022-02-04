@@ -28,6 +28,10 @@ class Account extends Model<AccountAttributes, AccountInput> implements AccountA
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
+
+    static async getUsers () {
+        return this.findAll();
+    }
 }
 
 Account.init({
@@ -48,9 +52,12 @@ Account.init({
         unique: true,
     },
 }, {
+    tableName: 'accounts',
     timestamps: true,
     sequelize: sequelizeConnection,
     paranoid: true,
 });
+
+Account.sync()
 
 export default Account;

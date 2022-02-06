@@ -6,6 +6,7 @@ const dbUser = process.env.DB_USER as string;
 const dbHost = process.env.DB_HOST;
 const dbDriver = process.env.DB_DRIVER as Dialect;
 const dbPassword = process.env.DB_PASSWORD;
+export const loggerLevel = process.env.LOGGER_LEVEL;
 
 const sequelizeConnection = new Sequelize(dbName, dbUser, dbPassword, {
     host: dbHost,

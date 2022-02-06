@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelizeConnection from '../config';
 import { Rights } from '../enums/rights.enum';
+import { User } from '../interface/user.interface';
 
 interface AccountAttributes {
     id: number;
@@ -29,8 +30,20 @@ class Account extends Model<AccountAttributes, AccountInput> implements AccountA
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 
-    static async getUsers () {
+    static async createAccount(data: User) {
+        return this.create(data);
+    }
+
+    static async getAccounts() {
         return this.findAll();
+    }
+
+    static async getAccountsByLogin(login: string) {
+        return this.findOne({
+            where: {
+                login,
+            },
+        });
     }
 }
 
@@ -51,13 +64,21 @@ Account.init({
         type: DataTypes.STRING,
         unique: true,
     },
+    rights: {
+        type: DataTypes.ENUM(
+            'guest',
+            'user',
+            'admin',
+            'developer',
+        ),
+        defaultValue: 'guest',
+    },
 }, {
     tableName: 'accounts',
     timestamps: true,
     sequelize: sequelizeConnection,
-    paranoid: true,
 });
 
-Account.sync()
+// Account.sync()
 
 export default Account;

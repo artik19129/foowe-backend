@@ -4,6 +4,8 @@ export interface User {
     id?: number;
     login: string;
     password: string;
-    email: string;
-    rights?: Rights;
+    email?: string;
+    rights: Rights;
+    createdAt: Date;
+    updatedAt: Date;
 }

@@ -6,6 +6,7 @@ export interface User {
     password: string;
     email?: string;
     rights: Rights;
+    hwid?: string;
     createdAt: Date;
     updatedAt: Date;
 }

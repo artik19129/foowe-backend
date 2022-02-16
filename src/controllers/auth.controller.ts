@@ -16,8 +16,14 @@ export async function login(req: Req, res: Response): Promise<Response | void> {
         const errorData = errors[names.INVALID_CREDENTIALS];
         return res.json({...errorData}).status(errorData.code);
     }
+    let account
 
-    const account = await Account.getAccountsByLogin(candidate.login);
+    try {
+        account = await Account.getAccountsByLogin(candidate.login);
+    } catch (e) {
+        console.log(e);
+        logger.error(candidate.login, e)
+    }
 
     console.log(account);
 

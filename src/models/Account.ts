@@ -9,6 +9,7 @@ interface AccountAttributes {
     password: string;
     email: string;
     rights?: Rights;
+    hwid?: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -25,6 +26,7 @@ class Account extends Model<AccountAttributes, AccountInput> implements AccountA
     public password!: string;
     public email!: string;
     public rights?: Rights;
+    public hwid?: string;
 
 
     public readonly createdAt!: Date;
@@ -36,6 +38,14 @@ class Account extends Model<AccountAttributes, AccountInput> implements AccountA
 
     static async getAccounts() {
         return this.findAll();
+    }
+
+    static async getAccountsByHwid(hwid: string) {
+        return this.findOne({
+            where: {
+                hwid,
+            },
+        });
     }
 
     static async getAccountsByLogin(login: string) {
@@ -73,6 +83,10 @@ Account.init({
         ),
         defaultValue: 'guest',
     },
+    hwid: {
+        type: DataTypes.STRING,
+        defaultValue: null,
+    }
 }, {
     tableName: 'accounts',
     timestamps: true,

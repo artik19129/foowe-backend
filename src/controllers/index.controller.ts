@@ -19,7 +19,6 @@ export async function information(req: Request, res: Response) {
 
    try {
       account = await Account.getAccountsByHwid(req.body.hwid);
-      console.log(account);
    } catch (e) {
       console.log(e);
    }

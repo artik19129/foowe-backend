@@ -2,7 +2,6 @@ import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { SocketEvent } from '../types/global';
 import { Server, Socket } from 'socket.io';
 import Account from '../models/Account';
-import { App } from '../app';
 
 class SocketManager {
     private socketIo: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any> | null;

@@ -10,13 +10,14 @@ import logger from '../logger';
 export async function login(req: Req, res: Response): Promise<Response | void> {
     const candidate: User = req.body;
 
-    console.log(candidate);
+    // console.log(candidate);
 
     if (!candidate.login || !candidate.password) {
         const errorData = errors[names.INVALID_CREDENTIALS];
         return res.json({...errorData}).status(errorData.code);
     }
-    let account
+
+    let account;
 
     try {
         account = await Account.getAccountsByLogin(candidate.login);
@@ -25,7 +26,7 @@ export async function login(req: Req, res: Response): Promise<Response | void> {
         logger.error(candidate.login, e)
     }
 
-    console.log(account);
+    // console.log(account);
 
     if (!account) {
         const errorData = errors[names.ACCOUNT_NOT_FOUNT];

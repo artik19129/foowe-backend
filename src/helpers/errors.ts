@@ -1,6 +1,3 @@
-import { Request, Response } from 'express';
-import e from 'express/ts4.0';
-
 export enum names {
     ACCOUNT_NOT_FOUNT = 'ACCOUNT_NOT_FOUNT',
     INVALID_CREDENTIALS = 'INVALID_CREDENTIALS'
